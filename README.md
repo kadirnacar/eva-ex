@@ -30,7 +30,6 @@ DB_URL='postgres://evauser:eva123@localhost:5432/evaexchange' #for local develop
 
 First initilize
 
-For Development
 ```
 yarn install
 ```
