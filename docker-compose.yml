@@ -1,0 +1,26 @@
+version: '1'
+services:
+  web:
+    build: .
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    env_file: .env
+    depends_on:
+      - postgres
+    volumes:
+      - ./app:/opt/webapp
+    links:
+      - postgres
+    environment:
+      DB_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      PORT: ${SERVER_PORT}
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: ${PGDATA}

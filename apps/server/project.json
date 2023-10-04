@@ -5,29 +5,26 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/esbuild:esbuild",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "defaultConfiguration": "development",
       "options": {
-        "platform": "node",
         "outputPath": "dist/apps/server",
-        "format": ["cjs"],
-        "bundle": false,
         "main": "apps/server/src/main.ts",
         "tsConfig": "apps/server/tsconfig.app.json",
         "assets": ["apps/server/src/assets"],
+        "sourcemap": true,
         "generatePackageJson": true,
-        "esbuildOptions": {
-          "sourcemap": true,
-          "outExtension": {
-            ".js": ".js"
-          }
-        }
+        "generateExportsField": true,
+        "bundle": true,
+        "platform": "node",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "configurations": {
         "development": {},
         "production": {
           "generateLockfile": true,
+          "sourcemap": false,
           "esbuildOptions": {
             "sourcemap": false,
             "outExtension": {
